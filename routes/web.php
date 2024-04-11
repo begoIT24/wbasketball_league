@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+//resource coge todos los métodos del controlador y crea todas las rutas 
+
+Route::resource('/teams', TeamController::class);
+/*  las rutas individualmente serían así:
+    Route::get('teams', [TeamController::class, 'index']);
+    Route::post('teams/store', [TeamController::class, 'store']); ...  */
