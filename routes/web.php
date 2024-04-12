@@ -16,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-//resource coge todos los métodos del controlador y crea todas las rutas 
+/* resource coge todos los métodos del controlador y crea todas las rutas 
+    automáticamente
+Route::resource('/teams', TeamController::class);  */
 
-Route::resource('/teams', TeamController::class);
-/*  las rutas individualmente serían así:
-    Route::get('teams', [TeamController::class, 'index']);
-    Route::post('teams/store', [TeamController::class, 'store']); ...  */
+    Route::get('teams', [TeamController::class, 'index'])->name('teams.index');
+    Route::get('teams/create', [TeamController::class, 'create'])->name('teams.create');
+    Route::post('teams/store', [TeamController::class, 'store'])->name('teams.store');
+    Route::get('teams/{id}', [TeamController::class, 'show'])->name('teams.show');

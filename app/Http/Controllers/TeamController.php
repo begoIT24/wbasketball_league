@@ -12,7 +12,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Team::all();  // no se pone new
+        $teams = Team::orderBy('ranking', 'asc')->paginate();  // no se pone new
         return view('teams.index', ['teams' => $teams]);
     }
 
@@ -21,7 +21,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        //
+       return view('teams.create');
     }
 
     /**
@@ -29,9 +29,21 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // return $request->all();
+       
+        $team = new Team();
 
+        $team->name = $request->name;
+        $team->address = $request->address;
+        $team->logo = $request->logo;
+
+        // return $team;
+
+        $team->save();
+
+        return redirect()->route('teams.show'. $team);
+    }
+    
     /**
      * Display the specified resource.
      */
