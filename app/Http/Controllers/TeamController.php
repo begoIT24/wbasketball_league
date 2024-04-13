@@ -41,15 +41,17 @@ class TeamController extends Controller
 
         $team->save();
 
-        return redirect()->route('teams.show'. $team);
+        return redirect()->route('teams.index');
     }
     
     /**
      * Display the specified resource.
      */
-    public function show(Team $team)
+    public function show($id)
     {
-        //
+       $team = team::find($id);
+       
+       return view('teams.show', ['team' => $team]);
     }
 
     /**
