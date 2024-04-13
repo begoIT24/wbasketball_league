@@ -47,7 +47,7 @@ class TeamController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($id)  //enviando el objeto (Team $team) se puede omitir find
     {
        $team = team::find($id);
        
@@ -57,24 +57,38 @@ class TeamController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Team $team)
+    public function edit($id)
     {
-        //
+        $team = team::find($id);
+
+        return view('teams.edit', ['team' => $team]);  //se puede usar compact cuando es el mismo nombre
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Team $team)
-    {
-        //
+    public function update(Request $request, $id)
+    {        
+        $team = team::find($id);
+
+        $team->name = $request->name;
+        $team->address = $request->address;
+        $team->logo = $request->logo;
+        
+        $team->save();
+
+        return view('teams.show', ['team' => $team]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Team $team)
+    public function destroy($id) 
     {
-        //
+        $team = team::find($id);
+
+        $team->delete();
+
+        return redirect()->route('teams.index');
     }
 }

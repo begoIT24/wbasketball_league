@@ -45,9 +45,11 @@ Teams | Wbasketball League
         </table>
         </div>
         <br>
-        {{$teams->links()}}
+
+        {{$teams->links()}}   <!-- paginación automática -->
        
     </div>
     
-</body>    
+</body>
+  
       
