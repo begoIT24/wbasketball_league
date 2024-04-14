@@ -14,9 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+Route::get('/', [MatchController::class, 'index'])->name('matches.index');
+
 /* resource coge todos los métodos del controlador y crea todas las rutas automáticamente
     Route::resource('/teams', TeamController::class);  */
 

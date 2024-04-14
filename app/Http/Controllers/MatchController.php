@@ -12,8 +12,9 @@ class MatchController extends Controller
      */
     public function index()
     {
-        $matches = Matche::orderBy('date', 'desc')->paginate();  // no se pone new
+        $matches = Matche::latest()->paginate(10);  // no se pone new
         return view('matches.index', ['matches' => $matches]);
+        
     }
 
     /**

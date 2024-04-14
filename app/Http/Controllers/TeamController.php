@@ -12,7 +12,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Team::orderBy('ranking', 'asc')->paginate();  // no se pone new
+        $teams = Team::orderBy('ranking', 'asc')->paginate(10);  // no se pone new
         return view('teams.index', ['teams' => $teams]);
     }
 
