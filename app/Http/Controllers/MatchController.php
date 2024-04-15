@@ -13,7 +13,7 @@ class MatchController extends Controller
      */
     public function index()
     {
-        $matches = Matche::latest()->paginate(10);  // no se pone new
+        $matches = Matche::orderBy('id', 'asc')->paginate(10);  // no se pone new
        
         return view('matches.index', ['matches' => $matches]);
         
@@ -38,8 +38,8 @@ class MatchController extends Controller
        
         $match = new Matche();
 
-        $match->local_team_id = $request->local_team;
-        $match->visitor_team_id = $request->visitor_team;
+        $match->team_local_id = $request->local_team;
+        $match->team_visitor_id = $request->visitor_team;
         $match->points_local = $request->points_local;
         $match->points_visitor = $request->points_visitor;
         $match->date_match = $request->date_match;
