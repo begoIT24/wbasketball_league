@@ -18,7 +18,7 @@ New Team | Wbasketball League
         </div>
         <div class="flex justify-center mt-8">
        
-        <form action="{{ route('teams.store') }}" method="POST" class="max-w-sm mx-auto">
+        <form action="{{ route('teams.store') }}" method="POST" class="max-w-sm mx-auto" enctype="multipart/form-data">
 
             @csrf  <!-- genera token para realizar input oculto -->
 

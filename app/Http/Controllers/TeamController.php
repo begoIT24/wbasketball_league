@@ -30,12 +30,16 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         // return $request->all();
-       
+
+        // Crear el nuevo equipo y guardar los datos en la base de datos
         $team = new Team();
 
         $team->name = $request->name;
         $team->address = $request->address;
-        $team->logo = $request->logo;
+        $image = $request->file('logo');
+        $destinationPath = 'images/';
+        $team->logo = '/' . $destinationPath . $image->getClientOriginalName();
+        $image->move($destinationPath, $team->logo);
 
         // return $team;
 
