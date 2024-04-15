@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('team_visitor_id');
             $table->integer('points_local')->nullable();
             $table->integer('points_visitor')->nullable();
-            $table->dateTime('date_match')->nullable();
+            $table->dateTime('date_match');
             $table->timestamps(); //created_at / updated_at
             //constraint - foreign keys
             $table->foreign('team_local_id')->references('id')->on('teams');

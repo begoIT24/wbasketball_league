@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Matche;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class MatchController extends Controller
@@ -12,7 +13,10 @@ class MatchController extends Controller
      */
     public function index()
     {
-        //
+        $matches = Matche::latest()->paginate(10);  // no se pone new
+       
+        return view('matches.index', ['matches' => $matches]);
+        
     }
 
     /**
@@ -20,7 +24,9 @@ class MatchController extends Controller
      */
     public function create()
     {
-        //
+        $teams = Team::all();
+
+        return view('matches.create', ['teams' => $teams]);
     }
 
     /**
@@ -28,38 +34,70 @@ class MatchController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // return $request->all();
+       
+        $match = new Matche();
 
+        $match->local_team_id = $request->local_team;
+        $match->visitor_team_id = $request->visitor_team;
+        $match->points_local = $request->points_local;
+        $match->points_visitor = $request->points_visitor;
+        $match->date_match = $request->date_match;
+        
+        $match->save();
+
+        return redirect()->route('matches.index');
+    }
+    
     /**
      * Display the specified resource.
      */
-    public function show(Matche $matche)
+    public function show($id)  //enviando el objeto (Team $team) se puede omitir find
     {
-        //
+       $match = matche::find($id);
+       
+       return view('matches.show', ['match' => $match]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Matche $matche)
+    public function edit($id)
     {
-        //
+        $match = matche::find($id);
+
+        $teams = Team::all();
+
+        return view('matches.edit', ['match' => $match], ['teams' => $teams]);  //se puede usar compact cuando es el mismo nombre
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Matche $matche)
-    {
-        //
+    public function update(Request $request, $id)
+    {        
+        $match = matche::find($id);
+
+        $match->local_team_id = $request->local_team;
+        $match->visitor_team_id = $request->visitor_team;
+        $match->points_local = $request->points_local;
+        $match->points_visitor = $request->points_visitor;
+        $match->date_match = $request->date_match;
+        
+        $match->save();
+
+        return view('matches.show', ['match' => $match]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Matche $matche)
+    public function destroy($id) 
     {
-        //
+        $match = matche::find($id);
+
+        $match->delete();
+
+        return redirect()->route('matches.index');
     }
 }

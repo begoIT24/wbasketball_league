@@ -15,9 +15,9 @@ return new class extends Migration
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
-            $table->string('name', 45);
-            $table->string('logo', 45);
-            $table->string('address', 100);
+            $table->string('name');
+            $table->string('logo');
+            $table->string('address');
             $table->integer('ranking');
             $table->timestamps();
         });
