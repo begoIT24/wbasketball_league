@@ -31,4 +31,17 @@ class Matche extends Model
         return $visitorTeam;
     }
 
+    public function getLocalLogo(){
+        $localLogo = Team::where('id', $this->team_local_id)->value('logo');            // ->first();  devuelve todo el objeto
+
+        return $localLogo;
+    }
+    
+    
+    public function getVisitorLogo(){
+        $visitorLogo = Team::where('id', $this->team_visitor_id)->value('logo');
+
+        return $visitorLogo;
+    }
+
 }

@@ -39,7 +39,7 @@ Teams | Wbasketball League
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700">
                             <a href="{{ route('teams.show', $team->id) }}" class="hover:underline relative inline-block">{{ $team->name }}</a>
                         </td>
-                        <td class="whitespace-nowrap px-4 py-2 text-gray-700"><img src="{{ $team->logo }}" alt="Logo Equipo A" class="h-10 w-10"></td>
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700"><img src="{{ asset($team->logo) }}" alt="Logo Equipo" class="h-10 w-10"></td>
                         <td class="border px-4 py-2 text-gray-700">{{ $team->ranking }}</td>
                         <td class="border px-4 py-2 text-gray-700">{{ $team->address }}</td>                                   
                     </tr>

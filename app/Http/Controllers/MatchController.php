@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Matche;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class MatchController extends Controller
@@ -13,6 +14,7 @@ class MatchController extends Controller
     public function index()
     {
         $matches = Matche::latest()->paginate(10);  // no se pone new
+       
         return view('matches.index', ['matches' => $matches]);
         
     }
@@ -22,7 +24,9 @@ class MatchController extends Controller
      */
     public function create()
     {
-       return view('matches.create');
+        $teams = Team::all();
+
+        return view('matches.create', ['teams' => $teams]);
     }
 
     /**
@@ -34,12 +38,12 @@ class MatchController extends Controller
        
         $match = new Matche();
 
-        $match->name = $request->name;
-        $match->address = $request->address;
-        $match->logo = $request->logo;
-
-        // return $team;
-
+        $match->local_team_id = $request->local_team;
+        $match->visitor_team_id = $request->visitor_team;
+        $match->points_local = $request->points_local;
+        $match->points_visitor = $request->points_visitor;
+        $match->date_match = $request->date_match;
+        
         $match->save();
 
         return redirect()->route('matches.index');
@@ -62,7 +66,9 @@ class MatchController extends Controller
     {
         $match = matche::find($id);
 
-        return view('matches.edit', ['match' => $match]);  //se puede usar compact cuando es el mismo nombre
+        $teams = Team::all();
+
+        return view('matches.edit', ['match' => $match], ['teams' => $teams]);  //se puede usar compact cuando es el mismo nombre
     }
 
     /**
@@ -72,9 +78,11 @@ class MatchController extends Controller
     {        
         $match = matche::find($id);
 
-        $match->name = $request->name;
-        $match->address = $request->address;
-        $match->logo = $request->logo;
+        $match->local_team_id = $request->local_team;
+        $match->visitor_team_id = $request->visitor_team;
+        $match->points_local = $request->points_local;
+        $match->points_visitor = $request->points_visitor;
+        $match->date_match = $request->date_match;
         
         $match->save();
 
