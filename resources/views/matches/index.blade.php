@@ -39,16 +39,19 @@ Match Calendar | Wbasketball League
                     <tr class="odd:bg-gray-50">
 
                     @foreach($matches as $match)
-                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $match->id }}</td>                   
+                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                        <a href="{{ route('matches.show', $match->id) }}" class="hover:underline relative inline-block">{{ $match->id }}</a>
+                    
+                        </td>                   
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700">
                             <a href="{{ route('teams.show', $match->team_local_id) }}" class="hover:underline relative inline-block">{{ $match->getLocalTeamName() }}</a>
                         </td>
-                        <td class="whitespace-nowrap px-4 py-2 text-gray-700"><img src="{{ asset($match->getLocalLogo()) }}" alt="Logo Equipo 1" class="h-10 w-10"></td>
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700"><img src="{{ asset($match->getLocalLogo()) }}" alt="LogoTeam1" class="h-10 w-10"></td>
                         <td class="border px-4 py-2 text-gray-700">{{ $match->points_local }}</td>
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700">
                             <a href="{{ route('teams.show', $match->team_visitor_id) }}" class="hover:underline relative inline-block">{{ $match->getVisitorTeamName() }}</a>
                         </td> 
-                        <td class="whitespace-nowrap px-4 py-2 text-gray-700"><img src="{{ asset($match->getVisitorLogo()) }}" alt="Logo Equipo 1" class="h-10 w-10"></td>                 
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700"><img src="{{ asset($match->getVisitorLogo()) }}" alt="LogoTeam2" class="h-10 w-10"></td>                 
                         <td class="border px-4 py-2 text-gray-700">{{ $match->points_visitor }}</td>
                         <td class="border px-4 py-2 text-gray-700">{{ $match->date_match }}</td>                                 
                     </tr>
