@@ -22,10 +22,12 @@ Edit Match | Wbasketball League
 
             @csrf 
 
+            @method('put')
+
             <div class="mb-5">
                 <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Local Team</label>
                 <select id="local_team" name="local_team"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required >
-                    <option selected ="selected local">{{ $match->getLocalTeamName() }} </option>
+                    <option selected = {{ $match->team_local_id }}>{{ $match->getLocalTeamName() }} </option>
                     @foreach($teams as $team)
                         <option value="{{ $team->id }}">{{ $team->name }}</option>
                      @endforeach
@@ -35,7 +37,7 @@ Edit Match | Wbasketball League
             <div class="mb-5">
                 <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Visitor Team</label>
                 <select id="visitor_team" name="visitor_team" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                    <option selected ="selected local">{{ $match->getVisitorTeamName() }} </option>
+                    <option selected = {{ $match->team_visitor_id }}>{{ $match->getVisitorTeamName() }} </option>
                     @foreach($teams as $team)
                         <option value="{{ $team->id }}">{{ $team->name }}</option>
                      @endforeach
