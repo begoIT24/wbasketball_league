@@ -16,31 +16,35 @@ class TeamsTableSeeder extends Seeder
         Team::create([
             'name' => 'Perfumerias Avenida',
             'address' => 'Salamanca',
-            'logo' => '/images/1perf_av.jpg',
+            'logo' => '/images/1perf_av.jpg',            
         ]);
 
         Team::create([
             'name' => 'Valencia B.C.',
             'address' => 'Valencia',
             'logo' => '/images/2valencia.jpg',
+            'ranking' => '1'
         ]);
 
         Team::create([
             'name' => 'Casademont Zaragoza',
             'address' => 'Zaragoza',
             'logo' => '/images/3zaragoza.jpg',
+            'ranking' => '4'
         ]);
 
         Team::create([
             'name' => 'Spar Girona',
             'address' => 'Girona',
             'logo' => '/images/4girona.jpg',
+            'ranking' => '2'
         ]);
 
         Team::create([
             'name' => 'Barça CBS',
             'address' => 'Barcelona',
             'logo' => '/images/5barsa.jpg',
+            'ranking' => '3'
         ]);
 
         Team::create([

@@ -18,7 +18,7 @@ Edit Team | Wbasketball League
         </div>
 
         <div class="flex justify-center mt-8">       
-            <form action="{{ route('teams.update', $team) }}" method="POST" class="max-w-sm mx-auto">
+            <form action="{{ route('teams.update', $team) }}" method="POST" class="max-w-sm mx-auto" enctype="multipart/form-data">
 
                 @csrf  <!-- genera token para realizar input oculto -->
 
@@ -36,7 +36,15 @@ Edit Team | Wbasketball League
 
                 <div class="mb-5">
                     <label for="logo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Team Logo</label>
-                    <input type="file" id="logo" name="logo" accept="image/*" value="{{ $team->logo }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                        @if($team->logo)
+                            <img src="{{ asset($team->logo) }}" alt="logo" class="mb-2 w-32 h-32 object-cover rounded-lg">
+                        @endif
+                    <input type="file" id="logo" name="logo" accept="image/*" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                </div>
+
+                <div class="mb-5">
+                    <label for="ranking" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ranking</label>
+                    <input type="number" id="ranking" name="ranking" value="{{ $team->ranking }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                 </div>
 
                 <div class="flex justify-between mb-5">

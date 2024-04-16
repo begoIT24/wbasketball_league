@@ -16,9 +16,9 @@ return new class extends Migration
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
             $table->string('name');
-            $table->string('logo');
+            $table->string('logo')->default('/images/LFendesa2.jpg');
             $table->string('address');
-            $table->integer('ranking');
+            $table->integer('ranking')->default(0);
             $table->timestamps();
         });
     }

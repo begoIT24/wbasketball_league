@@ -34,14 +34,16 @@ class MatchController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request->all();
+        $request->validate([
+            'local_team' => 'required',
+            'visitor_team' => 'required',
+            'date_match' => 'required|date'
+          ]);  
        
         $match = new Matche();
 
         $match->team_local_id = $request->local_team;
         $match->team_visitor_id = $request->visitor_team;
-        $match->points_local = $request->points_local;
-        $match->points_visitor = $request->points_visitor;
         $match->date_match = $request->date_match;
         
         $match->save();
@@ -76,25 +78,31 @@ class MatchController extends Controller
      */
     public function update(Request $request, $id)
     {        
-        $match = matche::find($id);
-
+        $request->validate([
+            'local_team' => 'required',
+            'visitor_team' => 'required',
+            'points_local' => 'nullable|numeric|min:0|max:200',
+            'points_visitor' => 'nullable|numeric|min:0|max:200',
+            'date_match' => 'required|date'
+          ]);  
         
-        if ($request->local_team != $match->team_local_id) {
-            if (is_numeric($request->local_team)) {
+        
+        $match = matche::find($id);     
+       
+        if (is_numeric($request->local_team)) {
                 $match->team_local_id = $request->local_team;
             } else {
                 $localTeam = Team::where('name', $request->local_team)->first();
                 $match->team_local_id = $localTeam->id;
-            }
-        }
-        if ($request->visitor_team != $match->team_visitor_id) {
-            if (is_numeric($request->visitor_team)) {
+            }      
+       
+        if (is_numeric($request->visitor_team)) {
                 $match->team_visitor_id = $request->visitor_team;
             } else {
                 $visitorTeam = Team::where('name', $request->visitor_team)->first();
                 $match->team_visitor_id = $visitorTeam->id;
             }
-        }
+     
         $match->points_local = $request->points_local;
         $match->points_visitor = $request->points_visitor;
         $match->date_match = $request->date_match;
