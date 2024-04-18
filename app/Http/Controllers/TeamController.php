@@ -86,7 +86,7 @@ class TeamController extends Controller
     public function update(Request $request, $id)
     {        
         $request->validate([
-            'name' => 'unique:teams|string|max:255',
+            'name' => 'string|max:255',
             'address' => 'string|max:255',
             'ranking' => 'numeric|min:0|max:20'
           ]); 
